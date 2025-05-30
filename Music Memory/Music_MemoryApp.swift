@@ -1,17 +1,15 @@
-//
-//  Music_MemoryApp.swift
-//  Music Memory
-//
-//  Created by Jacob Rees on 30/05/2025.
-//
-
 import SwiftUI
+import MusicKit
+import MediaPlayer
 
 @main
-struct Music_MemoryApp: App {
+struct MusicMemoryApp: App {
+    let persistenceController = PersistenceController.shared
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
