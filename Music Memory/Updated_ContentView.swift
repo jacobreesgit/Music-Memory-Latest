@@ -24,7 +24,7 @@ struct ContentView: View {
         .onAppear {
             setupApp()
         }
-        .onChange(of: setupManager.isSetupComplete) { isComplete in
+        .onChange(of: setupManager.isSetupComplete) { _, isComplete in
             if isComplete {
                 startMusicTracking()
             }

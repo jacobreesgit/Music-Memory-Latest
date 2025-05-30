@@ -420,13 +420,3 @@ class SessionManager: ObservableObject {
         }
     }
 }
-
-// MARK: - Integration Helper
-extension PlaybackMonitor {
-    func getCurrentSessionID() -> String {
-        // This method is already implemented in PlaybackMonitor
-        // Just exposing it for UI components
-        let sessionKey = "currentSessionID"
-        return UserDefaults.standard.string(forKey: sessionKey) ?? "No Session"
-    }
-}

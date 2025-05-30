@@ -73,15 +73,6 @@ class NowPlayingManager: ObservableObject {
             self?.updatePlaybackState()
         }
         
-        // Monitor playback time changes
-        NotificationCenter.default.addObserver(
-            forName: .MPMusicPlayerControllerPlaybackTimeDidChange,
-            object: systemPlayer,
-            queue: .main
-        ) { [weak self] _ in
-            self?.updateCurrentTime()
-        }
-        
         // Initial state update
         updateCurrentSong()
         updatePlaybackState()

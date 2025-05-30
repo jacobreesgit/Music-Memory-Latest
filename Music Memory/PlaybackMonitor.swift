@@ -309,7 +309,7 @@ class PlaybackMonitor: ObservableObject {
     }
     
     // MARK: - Session Management
-    private func getCurrentSessionID() -> String {
+    func getCurrentSessionID() -> String {
         let sessionKey = "currentSessionID"
         let lastSessionTime = "lastSessionTime"
         let sessionTimeout: TimeInterval = 30 * 60 // 30 minutes

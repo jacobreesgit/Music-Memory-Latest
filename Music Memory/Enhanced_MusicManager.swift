@@ -169,15 +169,17 @@ class MusicManager: ObservableObject {
         guard mediaLibraryStatus == .authorized else { return [] }
         
         let query = MPMediaQuery.songs()
-        query.sortDescriptors = [
-            MPMediaQuerySort(
-                property: MPMediaItemPropertyLastPlayedDate,
-                isAscending: false
-            )
-        ]
-        
         let items = query.items ?? []
-        return Array(items.prefix(limit))
+        
+        // Filter items that have lastPlayedDate and sort manually
+        let itemsWithPlayDate = items.filter { $0.lastPlayedDate != nil }
+        let sortedItems = itemsWithPlayDate.sorted { item1, item2 in
+            guard let date1 = item1.lastPlayedDate,
+                  let date2 = item2.lastPlayedDate else { return false }
+            return date1 > date2
+        }
+        
+        return Array(sortedItems.prefix(limit))
     }
     
     func getMostPlayed(limit: Int = 50) -> [MPMediaItem] {
