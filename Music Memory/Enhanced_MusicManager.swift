@@ -19,9 +19,12 @@ class MusicManager: ObservableObject {
     
     init(dataManager: DataManager = DataManager()) {
         self.dataManager = dataManager
-        self.playbackMonitor = PlaybackMonitor(dataManager: dataManager)
-        self.nowPlayingManager = NowPlayingManager(playbackMonitor: playbackMonitor)
-        self.backgroundTracker = BackgroundPlaybackTracker(playbackMonitor: playbackMonitor)
+        
+        // Initialize all stored properties first
+        let monitor = PlaybackMonitor(dataManager: dataManager)
+        self.playbackMonitor = monitor
+        self.nowPlayingManager = NowPlayingManager(playbackMonitor: monitor)
+        self.backgroundTracker = BackgroundPlaybackTracker(playbackMonitor: monitor)
         
         setupIntegration()
         checkInitialAuthorizationStatus()
