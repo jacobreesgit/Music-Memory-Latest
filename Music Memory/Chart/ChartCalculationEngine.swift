@@ -84,8 +84,8 @@ enum EntityType: String, CaseIterable {
     }
 }
 
-// MARK: - Chart Movement
-enum ChartMovement: Equatable {
+// MARK: - Chart Movement (Chart-specific version)
+enum ChartItemMovement: Equatable {
     case new                    // First time on chart
     case reentry               // Returning after absence
     case up(Int)               // Moved up X positions
@@ -123,7 +123,7 @@ struct ChartItem: Identifiable, Equatable {
     let totalDuration: TimeInterval
     let averageCompletion: Double
     let artworkURL: URL?
-    var movement: ChartMovement = .new
+    var movement: ChartItemMovement = .new
     
     // Optional properties for different entity types
     let uniqueSongsPlayed: Int?
@@ -538,7 +538,7 @@ class ChartMovementTracker {
         }
     }
     
-    private func determineNewVsReentry(_ entityID: String, entityType: EntityType) -> ChartMovement {
+    private func determineNewVsReentry(_ entityID: String, entityType: EntityType) -> ChartItemMovement {
         // Check if this entity has been on charts before
         // For now, default to .new, but this could be enhanced with historical chart data
         return .new

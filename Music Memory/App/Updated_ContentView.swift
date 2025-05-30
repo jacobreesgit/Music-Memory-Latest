@@ -165,6 +165,7 @@ struct ChartsViewWrapper: View {
 // MARK: - Dashboard View
 struct DashboardView: View {
     let musicManager: MusicManager
+    @StateObject private var dataManager = DataManager()
     
     var body: some View {
         NavigationView {
@@ -301,7 +302,7 @@ struct DashboardView: View {
                 Spacer()
             }
             
-            let recentPlays = musicManager.dataManager.fetchRecentPlays(limit: 5)
+            let recentPlays = dataManager.fetchRecentPlays(limit: 5)
             
             if recentPlays.isEmpty {
                 Text("No recent activity")

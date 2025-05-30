@@ -349,7 +349,7 @@ struct ChartItemDetailView: View {
 
 // MARK: - Movement Badge
 struct MovementBadge: View {
-    let movement: ChartMovement
+    let movement: ChartItemMovement
     
     var body: some View {
         HStack(spacing: 2) {

@@ -233,3 +233,109 @@ struct DatePickerRow: View {
                 .datePickerStyle(CompactDatePickerStyle())
         }
     }
+}
+
+// MARK: - Current Selection View
+struct CurrentSelectionView: View {
+    let selectedRange: DateRangeFilter
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            HStack {
+                Text("Selected Period")
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .foregroundColor(.secondary)
+                
+                Spacer()
+                
+                Text(queryStrategyDescription)
+                    .font(.caption2)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 2)
+                    .background(Color.accentColor.opacity(0.2))
+                    .foregroundColor(.accentColor)
+                    .cornerRadius(4)
+            }
+            
+            HStack {
+                Text(selectedRange.displayName)
+                    .font(.system(size: 15, weight: .semibold))
+                
+                Spacer()
+                
+                Text(periodInfo)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(12)
+    }
+    
+    private var queryStrategyDescription: String {
+        switch selectedRange.queryStrategy {
+        case .useRecentPlays:
+            return "High Detail"
+        case .useDailyAggregates:
+            return "Daily Summary"
+        case .useWeeklyAggregates:
+            return "Weekly Summary"
+        }
+    }
+    
+    private var periodInfo: String {
+        let calendar = Calendar.current
+        let days = calendar.dateComponents([.day], from: selectedRange.startDate, to: selectedRange.endDate).day ?? 0
+        
+        if days == 0 {
+            return "Today only"
+        } else if days == 1 {
+            return "1 day"
+        } else if days < 30 {
+            return "\(days) days"
+        } else if days < 365 {
+            let months = days / 30
+            return "\(months) month\(months == 1 ? "" : "s")"
+        } else {
+            let years = days / 365
+            return "\(years) year\(years == 1 ? "" : "s")"
+        }
+    }
+}
+
+// MARK: - Button Styles
+struct PrimaryButtonStyle: ButtonStyle {
+    let enabled: Bool
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.system(size: 15, weight: .semibold))
+            .foregroundColor(.white)
+            .padding(.horizontal, 24)
+            .padding(.vertical, 10)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(enabled ? Color.accentColor : Color.gray)
+            )
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
+    }
+}
+
+struct SecondaryButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.system(size: 15, weight: .medium))
+            .foregroundColor(.accentColor)
+            .padding(.horizontal, 24)
+            .padding(.vertical, 10)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.accentColor, lineWidth: 1)
+            )
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
+    }
+}

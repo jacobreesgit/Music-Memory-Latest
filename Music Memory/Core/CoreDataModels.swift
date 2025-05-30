@@ -109,8 +109,8 @@ extension ArtistMetadata {
     }
 }
 
-// MARK: - Chart Movement Enum
-enum ChartMovement: String, CaseIterable {
+// MARK: - Core Data Chart Movement Enum (for ChartSnapshot entity)
+enum CoreDataChartMovement: String, CaseIterable {
     case up = "up"
     case down = "down"
     case same = "same"
