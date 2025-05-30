@@ -10,22 +10,9 @@
 		07713D142DEA20BF0085A773 /* Music Memory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music Memory.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		07713D3D2DEA22E60085A773 /* Exceptions for "Music Memory" folder in "Music Memory" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Music-Memory-Info.plist",
-			);
-			target = 07713D132DEA20BF0085A773 /* Music Memory */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		07713D162DEA20BF0085A773 /* Music Memory */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				07713D3D2DEA22E60085A773 /* Exceptions for "Music Memory" folder in "Music Memory" target */,
-			);
 			path = "Music Memory";
 			sourceTree = "<group>";
 		};
